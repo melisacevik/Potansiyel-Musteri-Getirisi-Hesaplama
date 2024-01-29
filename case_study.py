@@ -109,12 +109,18 @@ customers_level_based = pd.DataFrame({
 })
 
 ###################################### GÖREV 7 #####################################
-agg_df["PRICE"] = pd.to_numeric(agg_df["PRICE"])  # PRICE series yapıda olduğu için cut fonk. kullanmak için numeric'e çevrildi
+agg_df["PRICE"] = pd.to_numeric(agg_df["PRICE"])  # PRICE serisi sayısal veri tipine çevrildi
 
-price_bins = [0, 10,20, 30, 40, 50,60]
-price_labels = ['F','E', 'D', 'C', 'B', 'A']
+price_bins = [0, 10, 20, 30, 40, 50, 60]
+price_labels = ['F', 'E', 'D', 'C', 'B', 'A']
 
-agg_df['SEGMENT'] = pd.cut(agg_df['PRICE'], bins=price_bins, labels=price_labels, right=False) # sağ sınırı kabul etme
+agg_df['SEGMENT'] = pd.cut(agg_df['PRICE'], bins=price_bins, labels=price_labels, right=False)  # sağ sınırı kabul etme
+
+group_with_segment = agg_df.groupby("SEGMENT")["PRICE"].agg(["mean", "std", "min", "max"])
+
+group_with_segment.dropna()
+
+
 
 
 
