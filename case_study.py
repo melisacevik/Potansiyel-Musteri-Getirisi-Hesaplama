@@ -95,7 +95,7 @@ df.groupby(["COUNTRY","SOURCE"])["PRICE"].mean()
 #1. çözüm
 df.groupby(["COUNTRY", "SOURCE", "SEX", "AGE"])["PRICE"].mean()
 #2. çözüm
-df.groupby(['COUNTRY', 'SOURCE', 'SEX', 'AGE'], as_index=False)['PRICE'].mean()
+df.groupby(['COUNTRY', 'SOURCE', 'SEX', 'AGE'], as_index=False)['PRICE'].mean() #reset_index görevi görüyor
 
    ###################################### GÖREV 3 #####################################
 #Görev 3:  Çıktıyı PRICE’a göre sıralayınız.
@@ -133,6 +133,9 @@ customers_level_based = pd.DataFrame({
 
 agg_df["SEGMENT"] = pd.qcut(agg_df["PRICE"], 4, labels=["D", "C", "B", "A"])
 print(agg_df)
+
+# qcut dezavantajı şu; price sürekli değişebilecek bir değişken
+# ya da yanına bi döviz kuru getirirsin
 
 agg_df.groupby("SEGMENT").agg({"PRICE": ["mean", "max", "sum"]})
 
